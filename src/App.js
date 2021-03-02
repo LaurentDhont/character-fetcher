@@ -51,6 +51,9 @@ function App() {
                                     end: undefined
                                 };
                             }
+                            else {
+                                console.log(letters[letters.length - 1]);
+                            }
                         }
                         else {
                             block.count++;
@@ -65,6 +68,9 @@ function App() {
                 }
             },
             complete: () => {
+                block.end = letters[letters.length - 1].unicode;
+                blocks.push(block);
+
                 let calculatedRegex = "[";
 
                 for (let i = 0; i < blocks.length; i++) {
