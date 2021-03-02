@@ -32,13 +32,25 @@ function App() {
                         const previousLetter = letters[letters.length - 1].unicode;
 
                         if (previousLetter && parseInt(previousLetter, 16) + 1 !== parseInt(results.data[0], 16)) {
-                            block.end = previousLetter;
-                            blocks.push(block);
-                            block = {
-                                beginning: results.data[0],
-                                count: 1,
-                                end: undefined
-                            };
+                            let endBlock = true;
+
+                            if (letters[letters.length - 1].description.startsWith("<") && letters[letters.length - 1].description.endsWith(">")) {
+                                if (results.data[1].startsWith('<') && results.data[1].endsWith(">")) {
+                                    if (results.data[1].slice(1, -1).split(',')[1].trim() === "Last") {
+                                        block.count = 3;
+                                        endBlock = false;
+                                    }
+                                }
+                            }
+                            if (endBlock) {
+                                block.end = previousLetter;
+                                blocks.push(block);
+                                block = {
+                                    beginning: results.data[0],
+                                    count: 1,
+                                    end: undefined
+                                };
+                            }
                         }
                         else {
                             block.count++;
