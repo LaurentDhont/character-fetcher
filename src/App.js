@@ -210,9 +210,9 @@ function App() {
                     </tr>
                     </thead>
                     <tbody>
-                    {chars.map(value => {
+                    {chars.map((value, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 <td>{value.unicode}</td>
                                 <td>{unicodeToString(value.unicode)}</td>
                                 <td>{value.description}</td>
